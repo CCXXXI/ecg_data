@@ -1,6 +1,6 @@
 # mamba env create -f environment.yml --force
 name: physionet
-channels: [ conda-forge ]
+channels: [conda-forge]
 dependencies:
   - wfdb
   - pyedflib
