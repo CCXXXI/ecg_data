@@ -27,3 +27,5 @@ jobs:
           key: downloads-${{ hashFiles('src/config.py') }}
       - run: pytest --cov=../ --cov-report xml
       - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
