@@ -1,16 +1,10 @@
-from wfdb import Record
-from wfdb.io import dl_database, rdheader, rdrecord
 import numpy as np
 import numpy.typing as npt
 from scipy.signal import resample
+from wfdb import Record
+from wfdb.io import dl_database, rdheader, rdrecord
 
-db_dir = "cebsdb"
-dl_dir = "../downloads/"
-record_name = "m001"
-record_path = dl_dir + record_name
-output_len_min = 10
-output_len_s = output_len_min * 60
-output_fs = 125
+from config import *
 
 
 def get_record() -> Record:
