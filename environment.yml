@@ -3,3 +3,4 @@ name: physionet
 channels: [conda-forge]
 dependencies:
   - wfdb
+  - scipy
