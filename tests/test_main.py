@@ -1,7 +1,9 @@
 import numpy as np
+from main import get_record
+from main import output_fs
+from main import output_len_s
+from main import record_to_array
 from pytest import fixture
-
-from main import get_record, output_fs, output_len_s, record_to_array
 
 
 @fixture
