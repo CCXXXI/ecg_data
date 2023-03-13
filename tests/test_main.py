@@ -18,10 +18,12 @@ def array(record):
 
 @fixture
 def saved_array():
-    return np.column_stack((
-        np.loadtxt("../assets/lead I.txt"),
-        np.loadtxt("../assets/lead II.txt"),
-    ))
+    return np.column_stack(
+        (
+            np.loadtxt("../assets/lead I.txt"),
+            np.loadtxt("../assets/lead II.txt"),
+        )
+    )
 
 
 def test_get_record(record):
