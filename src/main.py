@@ -38,9 +38,9 @@ def main():
 
     # False positives: https://youtrack.jetbrains.com/issue/PY-34337/numpy.savetxt-has-incorrect-type-hints
     # noinspection PyTypeChecker
-    np.savetxt("../assets/lead I.txt", array[:, 0], "%f")
+    np.savetxt("../assets/lead I.txt", array[:, 0], "%.15f")
     # noinspection PyTypeChecker
-    np.savetxt("../assets/lead II.txt", array[:, 1], "%f")
+    np.savetxt("../assets/lead II.txt", array[:, 1], "%.15f")
 
 
 if __name__ == "__main__":
