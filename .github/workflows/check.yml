@@ -1,0 +1,23 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+env:
+  PYTHONPATH: ../src
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+        working-directory: tests
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mamba-org/provision-with-micromamba@v15
+        with:
+          environment-file: "environment.yml"
+      - run: pytest --cov=../ --cov-report xml
+      - uses: codecov/codecov-action@v3
