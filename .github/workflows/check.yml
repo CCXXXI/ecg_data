@@ -1,0 +1,31 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+env:
+  PYTHONPATH: ../src
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+        working-directory: tests
+    steps:
+      - uses: actions/checkout@v3
+      - uses: mamba-org/provision-with-micromamba@v15
+        with:
+          environment-file: "environment.yml"
+          cache-downloads: true
+          cache-env: true
+      - uses: actions/cache@v3
+        with:
+          path: downloads/
+          key: downloads-${{ hashFiles('src/config.py') }}
+      - run: pytest --cov=../ --cov-report xml
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
