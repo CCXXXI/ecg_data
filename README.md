@@ -11,3 +11,5 @@
 A submodule of [CCXXXI/ecg_monitor](https://github.com/CCXXXI/ecg_monitor).
 
 This repository contains some data downloaded from [PhysioNet](https://physionet.org/).
+
+See [Combined measurement of ECG, Breathing and Seismocardiograms v1.0.0](https://physionet.org/content/cebsdb/1.0.0/).
