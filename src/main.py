@@ -40,7 +40,7 @@ def array_to_obj(array: npt.NDArray[np.float64]) -> list[dict[str, float | int]]
     ]
 
 
-def main():
+def main():  # pragma: no cover
     record = get_record()
     array = record_to_array(record)
     obj = array_to_obj(array)
@@ -49,5 +49,5 @@ def main():
         dump(obj, f, indent=2)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()
