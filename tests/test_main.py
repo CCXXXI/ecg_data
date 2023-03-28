@@ -1,10 +1,12 @@
 from json import load
 from math import isclose
 
+from main import array_to_obj
+from main import get_record
+from main import output_fs
+from main import output_len_s
+from main import record_to_array
 from pytest import fixture
-
-from main import (array_to_obj, get_record, output_fs, output_len_s,
-                  record_to_array)
 
 
 @fixture

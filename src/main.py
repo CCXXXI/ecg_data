@@ -2,11 +2,12 @@ from json import dump
 
 import numpy as np
 import numpy.typing as npt
+from config import *
 from scipy.signal import resample
 from wfdb import Record
-from wfdb.io import dl_database, rdheader, rdrecord
-
-from config import *
+from wfdb.io import dl_database
+from wfdb.io import rdheader
+from wfdb.io import rdrecord
 
 
 def get_record() -> Record:
