@@ -3,3 +3,7 @@ commit_template: "style: restyle by ${restyler.name}"
 restylers:
   - "*"
   - black
+also_exclude:
+  # Too large.
+  # See: https://github.com/CCXXXI/ecg_data/pull/5#issuecomment-1486037129
+  - "assets/data.json"
