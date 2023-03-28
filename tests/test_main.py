@@ -3,10 +3,8 @@ from math import isclose
 
 from pytest import fixture
 
-from main import get_record, array_to_obj
-from main import output_fs
-from main import output_len_s
-from main import record_to_array
+from main import (array_to_obj, get_record, output_fs, output_len_s,
+                  record_to_array)
 
 
 @fixture
