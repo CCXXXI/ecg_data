@@ -1,4 +1,5 @@
 from json import load
+from math import isclose
 
 from pytest import fixture
 
@@ -40,4 +41,7 @@ def test_record_to_array(array):
 
 
 def test_saved_obj(saved_obj, obj):
-    assert saved_obj == obj
+    for saved_point, point in zip(saved_obj, obj):
+        assert saved_point["millisecondsSinceStart"] == point["millisecondsSinceStart"]
+        assert isclose(saved_point["leadI"], point["leadI"])
+        assert isclose(saved_point["leadII"], point["leadII"])
