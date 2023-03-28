@@ -1,4 +1,7 @@
-import numpy as np
+from json import load
+from math import isclose
+
+from main import array_to_obj
 from main import get_record
 from main import output_fs
 from main import output_len_s
@@ -17,13 +20,14 @@ def array(record):
 
 
 @fixture
-def saved_array():
-    return np.column_stack(
-        (
-            np.loadtxt("../assets/lead I.txt"),
-            np.loadtxt("../assets/lead II.txt"),
-        )
-    )
+def obj(array):
+    return array_to_obj(array)
+
+
+@fixture
+def saved_obj():
+    with open("../assets/data.json") as f:
+        return load(f)
 
 
 def test_get_record(record):
@@ -36,5 +40,8 @@ def test_record_to_array(array):
     assert array.shape == (output_len_s * output_fs, 2)
 
 
-def test_saved_array(saved_array, array):
-    assert np.allclose(saved_array, array)
+def test_saved_obj(saved_obj, obj):
+    for saved_point, point in zip(saved_obj, obj):
+        assert saved_point["millisecondsSinceStart"] == point["millisecondsSinceStart"]
+        assert isclose(saved_point["leadI"], point["leadI"])
+        assert isclose(saved_point["leadII"], point["leadII"])
