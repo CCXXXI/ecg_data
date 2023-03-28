@@ -1,9 +1,11 @@
-import numpy as np
-from main import get_record
+from json import load
+
+from pytest import fixture
+
+from main import get_record, array_to_obj
 from main import output_fs
 from main import output_len_s
 from main import record_to_array
-from pytest import fixture
 
 
 @fixture
@@ -17,13 +19,14 @@ def array(record):
 
 
 @fixture
-def saved_array():
-    return np.column_stack(
-        (
-            np.loadtxt("../assets/lead I.txt"),
-            np.loadtxt("../assets/lead II.txt"),
-        )
-    )
+def obj(array):
+    return array_to_obj(array)
+
+
+@fixture
+def saved_obj():
+    with open("../assets/data.json") as f:
+        return load(f)
 
 
 def test_get_record(record):
@@ -36,5 +39,5 @@ def test_record_to_array(array):
     assert array.shape == (output_len_s * output_fs, 2)
 
 
-def test_saved_array(saved_array, array):
-    assert np.allclose(saved_array, array)
+def test_saved_obj(saved_obj, obj):
+    assert saved_obj == obj

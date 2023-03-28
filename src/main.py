@@ -1,11 +1,14 @@
+from json import dump
+
 import numpy as np
 import numpy.typing as npt
-from config import *
 from scipy.signal import resample
 from wfdb import Record
 from wfdb.io import dl_database
 from wfdb.io import rdheader
 from wfdb.io import rdrecord
+
+from config import *
 
 
 def get_record() -> Record:
@@ -27,15 +30,24 @@ def record_to_array(record: Record) -> npt.NDArray[np.float64]:
     return resample(record.p_signal, output_len_s * output_fs)
 
 
+def array_to_obj(array: npt.NDArray[np.float64]) -> list[dict[str, float | int]]:
+    return [
+        {
+            "millisecondsSinceStart": i * 1000 // output_fs,
+            "leadI": leads[0],
+            "leadII": leads[1],
+        }
+        for i, leads in enumerate(array)
+    ]
+
+
 def main():
     record = get_record()
     array = record_to_array(record)
+    obj = array_to_obj(array)
 
-    # False positives: https://youtrack.jetbrains.com/issue/PY-34337/numpy.savetxt-has-incorrect-type-hints
-    # noinspection PyTypeChecker
-    np.savetxt("../assets/lead I.txt", array[:, 0], "%.15f")
-    # noinspection PyTypeChecker
-    np.savetxt("../assets/lead II.txt", array[:, 1], "%.15f")
+    with open("../assets/data.json", "w") as f:
+        dump(obj, f, indent=2)
 
 
 if __name__ == "__main__":
