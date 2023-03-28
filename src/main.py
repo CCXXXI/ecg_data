@@ -29,15 +29,13 @@ def record_to_array(record: Record) -> npt.NDArray[np.float64]:
     return resample(record.p_signal, output_len_s * output_fs)
 
 
-def array_to_obj(array: npt.NDArray[np.float64]) -> list[dict[str, float | int]]:
-    return [
-        {
-            "millisecondsSinceStart": i * 1000 // output_fs,
-            "leadI": leads[0],
-            "leadII": leads[1],
-        }
-        for i, leads in enumerate(array)
-    ]
+def array_to_obj(
+        array: npt.NDArray[np.float64]) -> list[dict[str, float | int]]:
+    return [{
+        "millisecondsSinceStart": i * 1000 // output_fs,
+        "leadI": leads[0],
+        "leadII": leads[1],
+    } for i, leads in enumerate(array)]
 
 
 def main():
